@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, System.Generics.Collections, uFormSub,
   Vcl.StdCtrls, Vcl.ExtCtrls, IxPainter;
 
-{$DEFINE DEBUG_TOP_SHIFT}
+{$DEFINE xDEBUG_TOP_SHIFT}
 
 type
   TFormMain = class(TForm)
@@ -35,6 +35,7 @@ type
     procedure show_screensaver;
     procedure show_preview;
     procedure WMSysCommand(var Msg: TWMSysCommand); message WM_SYSCOMMAND;
+    procedure WMEraseBkgnd(var Message: TWMEraseBkgnd); message WM_ERASEBKGND;
   end;
 
 var
@@ -72,16 +73,22 @@ begin
   Forms := TObjectList<TFormSub>.Create;
   Painter := TIxPainter.Create;
 
+  EnableInput := false;
+  timer_count1 := 500;
+
   if hwndParam = 0 then
   begin
-    Hide; // 自分は非表示
+    ShowCursor(false); // カーソル非表示
+    ImeMode := imDisable; // IMEウィンドウを表示させない
     show_screensaver;
   end
   else
   begin
     show_preview;
-    Timer1.Enabled := true;
   end;
+
+  before_time := '';
+  Timer1.Enabled := true;
 end;
 
 // ====================================================================
@@ -102,7 +109,7 @@ begin
 end;
 
 // ====================================================================
-//
+// 二重起動防止
 // ====================================================================
 procedure TFormMain.WMSysCommand(var Msg: TWMSysCommand);
 begin
@@ -110,6 +117,14 @@ begin
     Msg.Result := 1
   else
     inherited;
+end;
+
+// ====================================================================
+// ちらつき防止
+// ====================================================================
+procedure TFormMain.WMEraseBkgnd(var Message: TWMEraseBkgnd);
+begin
+  // ちらつき防止
 end;
 
 // ====================================================================
@@ -139,6 +154,39 @@ end;
 // ====================================================================
 //
 // ====================================================================
+procedure TFormMain.FormPaint(Sender: TObject);
+begin
+  Painter.Paint(Canvas);
+end;
+
+// ====================================================================
+//
+// ====================================================================
+procedure TFormMain.Timer1Timer(Sender: TObject);
+var
+  str: string;
+begin
+  if timer_count1 > 0 then
+  begin
+    dec(timer_count1, Timer1.Interval);
+    if timer_count1 <= 0 then
+    begin
+      EnableInput := true;
+    end;
+  end;
+
+  DateTimeToString(str, 'nn', Now);
+  if before_time <> str then
+  begin
+    before_time := str;
+    Painter.DrawBackground;
+    Invalidate;
+  end;
+end;
+
+// ====================================================================
+// スクリーンセーバーの設定ダイアログ上に表示
+// ====================================================================
 procedure TFormMain.show_preview;
 var
   r: TRect;
@@ -152,7 +200,7 @@ begin
 end;
 
 // ====================================================================
-//
+// スクリーンセーバー表示
 // ====================================================================
 procedure TFormMain.show_screensaver;
 var
@@ -190,38 +238,6 @@ begin
       form_sub.Tag := i;
       Forms.Add(form_sub);
     end;
-  end;
-end;
-
-// ====================================================================
-//
-// ====================================================================
-procedure TFormMain.FormPaint(Sender: TObject);
-begin
-  Painter.Paint(Canvas);
-end;
-
-// ====================================================================
-//
-// ====================================================================
-procedure TFormMain.Timer1Timer(Sender: TObject);
-var
-  str: string;
-begin
-  if timer_count1 > 0 then
-  begin
-    dec(timer_count1, Timer1.Interval);
-    if timer_count1 <= 0 then
-    begin
-      EnableInput := true;
-    end;
-  end;
-
-  DateTimeToString(str, 'nn', Now);
-  if before_time <> str then
-  begin
-    before_time := str;
-    Invalidate;
   end;
 end;
 

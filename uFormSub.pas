@@ -29,6 +29,7 @@ type
     { Public 宣言 }
     EnableInput: boolean;
     procedure WMSysCommand(var Msg: TWMSysCommand); message WM_SYSCOMMAND;
+    procedure WMEraseBkgnd(var Message: TWMEraseBkgnd); message WM_ERASEBKGND;
   end;
 
 var
@@ -40,6 +41,9 @@ implementation
 
 uses uFormMain;
 
+// ====================================================================
+//
+// ====================================================================
 procedure TFormSub.CreateParams(var Params: TCreateParams);
 begin
   Inherited;
@@ -56,6 +60,65 @@ begin
   end;
 end;
 
+// ====================================================================
+//
+// ====================================================================
+procedure TFormSub.FormCreate(Sender: TObject);
+begin
+  Painter := TIxPainter.Create;
+
+  EnableInput := false;
+  timer_count1 := 500;
+
+  if hwndParam = 0 then
+  begin
+    ShowCursor(false); // カーソル非表示
+    ImeMode := imDisable; // IMEウィンドウを表示させない
+  end;
+
+  before_time := '';
+  Timer1.Enabled := true;
+end;
+
+// ====================================================================
+//
+// ====================================================================
+procedure TFormSub.FormDestroy(Sender: TObject);
+begin
+  ShowCursor(true);
+  Painter.Free;
+end;
+
+// ====================================================================
+//
+// ====================================================================
+procedure TFormSub.FormResize(Sender: TObject);
+begin
+  Painter.SetSize(Width, Height);
+end;
+
+// ====================================================================
+// 二重起動防止
+// ====================================================================
+procedure TFormSub.WMSysCommand(var Msg: TWMSysCommand);
+begin
+  if Msg.CmdType = SC_SCREENSAVE then
+    Msg.Result := 1
+  else
+    inherited;
+end;
+
+// ====================================================================
+// ちらつき防止
+// ====================================================================
+procedure TFormSub.WMEraseBkgnd(var Message: TWMEraseBkgnd);
+begin
+  // ちらつき防止
+end;
+
+// ====================================================================
+//
+// ====================================================================
 procedure TFormSub.FormClick(Sender: TObject);
 begin
   Application.Terminate;
@@ -77,37 +140,17 @@ begin
   mouse_y := Y;
 end;
 
-procedure TFormSub.FormCreate(Sender: TObject);
-begin
-  Painter := TIxPainter.Create;
-  if hwndParam = 0 then
-  begin
-    ShowCursor(false);
-    ImeMode := imDisable;
-    EnableInput := false;
-  end;
-
-  { IMEウィンドウを表示させない }
-  before_time := '';
-  timer_count1 := 500;
-end;
-
-procedure TFormSub.FormDestroy(Sender: TObject);
-begin
-  ShowCursor(true);
-  Painter.Free;
-end;
-
+// ====================================================================
+//
+// ====================================================================
 procedure TFormSub.FormPaint(Sender: TObject);
 begin
   Painter.Paint(Canvas);
 end;
 
-procedure TFormSub.FormResize(Sender: TObject);
-begin
-  Painter.SetSize(Width, Height);
-end;
-
+// ====================================================================
+//
+// ====================================================================
 procedure TFormSub.Timer1Timer(Sender: TObject);
 var
   str: string;
@@ -125,16 +168,10 @@ begin
   if before_time <> str then
   begin
     before_time := str;
-    Invalidate;
+    Painter.DrawBackground;
   end;
-end;
 
-procedure TFormSub.WMSysCommand(var Msg: TWMSysCommand);
-begin
-  if Msg.CmdType = SC_SCREENSAVE then
-    Msg.Result := 1
-  else
-    inherited;
+  Invalidate;
 end;
 
 end.
