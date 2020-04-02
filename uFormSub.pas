@@ -4,7 +4,7 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, IxPainter;
 
 type
   TFormSub = class(TForm)
@@ -16,18 +16,18 @@ type
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure FormMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
     procedure Timer1Timer(Sender: TObject);
+    procedure FormResize(Sender: TObject);
   protected
     procedure CreateParams(var Params: TCreateParams); override;
   private
     { Private 宣言 }
-    bg_bmp: TBitmap;
+    Painter: TIxPainter;
     before_time: string;
     mouse_x, mouse_y: Integer;
     timer_count1: Integer;
   public
     { Public 宣言 }
     EnableInput: boolean;
-    procedure draw_screen(tgt_canvas: TCanvas);
     procedure WMSysCommand(var Msg: TWMSysCommand); message WM_SYSCOMMAND;
   end;
 
@@ -56,35 +56,6 @@ begin
   end;
 end;
 
-procedure TFormSub.draw_screen(tgt_canvas: TCanvas);
-var
-  str: string;
-begin
-  // 描画パラメータ
-  bg_bmp.Canvas.Brush.Color := clBlack;
-  bg_bmp.Canvas.Brush.Style := bsSolid;
-  bg_bmp.Canvas.Font.Name := 'Segoe UI Black';
-  bg_bmp.Canvas.Font.Color := $202020;
-  bg_bmp.SetSize(Width, Height);
-
-  // 塗りつぶし
-  bg_bmp.Canvas.FillRect(Rect(0, 0, Width, Height));
-
-  // 描画
-  DateTimeToString(str, 'hh:nn', Now);
-
-  // フォントサイズ計算
-  bg_bmp.Canvas.Font.Height := bg_bmp.Canvas.TextHeight(str) * Width div bg_bmp.Canvas.TextWidth(str);
-  if bg_bmp.Canvas.Font.Height > bg_bmp.Canvas.TextWidth(str) * Height div bg_bmp.Canvas.TextHeight(str) then
-    bg_bmp.Canvas.Font.Height := bg_bmp.Canvas.TextWidth(str) * Height div bg_bmp.Canvas.TextHeight(str);
-
-  // 文字列描画
-  bg_bmp.Canvas.TextOut((Width - bg_bmp.Canvas.TextWidth(str)) div 2, (Height - bg_bmp.Canvas.TextHeight(str))
-    div 2, str);
-  tgt_canvas.Draw(0, 0, bg_bmp);
-  // tgt_canvas.TextOut(0, 0, Tag.ToString);
-end;
-
 procedure TFormSub.FormClick(Sender: TObject);
 begin
   Application.Terminate;
@@ -108,11 +79,15 @@ end;
 
 procedure TFormSub.FormCreate(Sender: TObject);
 begin
-  bg_bmp := TBitmap.Create;
-  ShowCursor(false);
+  Painter := TIxPainter.Create;
+  if hwndParam = 0 then
+  begin
+    ShowCursor(false);
+    ImeMode := imDisable;
+    EnableInput := false;
+  end;
+
   { IMEウィンドウを表示させない }
-  ImeMode := imDisable;
-  EnableInput := false;
   before_time := '';
   timer_count1 := 500;
 end;
@@ -120,12 +95,17 @@ end;
 procedure TFormSub.FormDestroy(Sender: TObject);
 begin
   ShowCursor(true);
-  bg_bmp.Free;
+  Painter.Free;
 end;
 
 procedure TFormSub.FormPaint(Sender: TObject);
 begin
-  draw_screen(Canvas);
+  Painter.Paint(Canvas);
+end;
+
+procedure TFormSub.FormResize(Sender: TObject);
+begin
+  Painter.SetSize(Width, Height);
 end;
 
 procedure TFormSub.Timer1Timer(Sender: TObject);

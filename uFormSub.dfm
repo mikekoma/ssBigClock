@@ -4,8 +4,8 @@ object FormSub: TFormSub
   BorderIcons = []
   BorderStyle = bsNone
   Caption = 'FormSub'
-  ClientHeight = 674
-  ClientWidth = 1302
+  ClientHeight = 191
+  ClientWidth = 216
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -21,12 +21,13 @@ object FormSub: TFormSub
   OnKeyDown = FormKeyDown
   OnMouseMove = FormMouseMove
   OnPaint = FormPaint
+  OnResize = FormResize
   PixelsPerInch = 96
   TextHeight = 13
   object Timer1: TTimer
     Interval = 100
     OnTimer = Timer1Timer
-    Left = 640
-    Top = 320
+    Left = 24
+    Top = 16
   end
 end

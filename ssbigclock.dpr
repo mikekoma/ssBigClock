@@ -4,9 +4,10 @@ uses
   Windows,
   SysUtils,
   Vcl.Forms,
-  uFormMain in 'uFormMain.pas' {FormMain} ,
-  uFormSub in 'uFormSub.pas' {FormSub} ,
-  uSeupDialog in 'uSeupDialog.pas' {SetupDialog};
+  uFormMain in 'uFormMain.pas' {FormMain},
+  uFormSub in 'uFormSub.pas' {FormSub},
+  uSeupDialog in 'uSeupDialog.pas' {SetupDialog},
+  IxPainter in 'IxPainter.pas';
 
 {$R *.res}
 
@@ -33,7 +34,7 @@ begin
       end;
     'P':
       begin
-{$IF false}
+{$IF true}
         { ÉvÉåÉrÉÖÅ[ }
         ShowWindow(Application.Handle, SW_HIDE);
         try
@@ -52,7 +53,7 @@ begin
       Application.Initialize;
       Application.MainFormOnTaskbar := False;
       Application.CreateForm(TFormMain, FormMain);
-      Application.Run;
+  Application.Run;
     end;
   end;
 
