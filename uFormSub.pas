@@ -4,7 +4,7 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, IxPainter;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, IxPainter, IxSettings;
 
 type
   TFormSub = class(TForm)
@@ -21,13 +21,13 @@ type
     procedure CreateParams(var Params: TCreateParams); override;
   private
     { Private êÈåæ }
-    Painter: TIxPainter;
     before_time: string;
     mouse_x, mouse_y: Integer;
     timer_count1: Integer;
+    EnableInput: boolean;
   public
     { Public êÈåæ }
-    EnableInput: boolean;
+    Painter: TIxPainter;
     procedure WMSysCommand(var Msg: TWMSysCommand); message WM_SYSCOMMAND;
     procedure WMEraseBkgnd(var Message: TWMEraseBkgnd); message WM_ERASEBKGND;
   end;

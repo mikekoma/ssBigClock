@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, System.Generics.Collections, uFormSub,
-  Vcl.StdCtrls, Vcl.ExtCtrls, IxPainter;
+  Vcl.StdCtrls, Vcl.ExtCtrls, IxPainter, IxSettings;
 
 {$DEFINE xDEBUG_TOP_SHIFT}
 
@@ -27,11 +27,12 @@ type
     mouse_x, mouse_y: Integer;
     timer_count1: Integer;
     Painter: TIxPainter;
+    EnableInput: boolean;
+    Settings: TIxSettings;
   protected
     procedure CreateParams(var Params: TCreateParams); override;
   public
     { Public 宣言 }
-    EnableInput: boolean;
     procedure show_screensaver;
     procedure show_preview;
     procedure WMSysCommand(var Msg: TWMSysCommand); message WM_SYSCOMMAND;
@@ -71,7 +72,9 @@ end;
 procedure TFormMain.FormCreate(Sender: TObject);
 begin
   Forms := TObjectList<TFormSub>.Create;
+  Settings := TIxSettings.Create;
   Painter := TIxPainter.Create;
+  Painter.Settings := Settings;
 
   EnableInput := false;
   timer_count1 := 500;
@@ -96,6 +99,7 @@ end;
 // ====================================================================
 procedure TFormMain.FormDestroy(Sender: TObject);
 begin
+  Settings.Free;
   Painter.Free;
   Forms.Free;
 end;
@@ -226,6 +230,7 @@ begin
     else
     begin
       form_sub := TFormSub.Create(self);
+      form_sub.Painter.Settings := Settings;
       form_sub.Show;
 {$IFDEF DEBUG_TOP_SHIFT}
       form_sub.Top := monitor.Height div 4 * 1; // デバッグ用にウィンドウを下へずらす
@@ -236,6 +241,7 @@ begin
       form_sub.Width := monitor.Width;
       form_sub.Height := monitor.Height;
       form_sub.Tag := i;
+
       Forms.Add(form_sub);
     end;
   end;

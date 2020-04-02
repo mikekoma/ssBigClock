@@ -7,7 +7,8 @@ uses
   uFormMain in 'uFormMain.pas' {FormMain},
   uFormSub in 'uFormSub.pas' {FormSub},
   uSeupDialog in 'uSeupDialog.pas' {SetupDialog},
-  IxPainter in 'IxPainter.pas';
+  IxPainter in 'IxPainter.pas',
+  IxSettings in 'IxSettings.pas';
 
 {$R *.res}
 
