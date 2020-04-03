@@ -22,11 +22,11 @@ Delphi XE10.3で開発
 ssbigclock.scr を C:\Windows\System32 へコピー
 
 ## Screen shots
-![Desktop](https://raw.github.com/mikekoma/ssBigClock/blob/master/readme/desktop.png)
+![Desktop](https://raw.githubusercontent.com/mikekoma/ssBigClock/master/readme/desktop.png)
 
-![Settings](https://raw.github.com/mikekoma/ssBigClock/blob/master/readme/setting.png)
+![Settings](https://raw.githubusercontent.com/mikekoma/ssBigClock/master/readme/setting.png)
 
-![Dialog](https://raw.github.com/mikekoma/ssBigClock/blob/master/readme/dialog.png)
+![Dialog](https://raw.githubusercontent.com/mikekoma/ssBigClock/master/readme/dialog.png)
 
 
 ## Licence
