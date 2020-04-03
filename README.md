@@ -1,8 +1,7 @@
-# Name
+# SSSM ssBigClock
+![Desktop](https://raw.githubusercontent.com/mikekoma/ssBigClock/master/readme/desktop.png)
 
-SSSM ssBigClock Version002
-
-## Overview
+# Overview
 Windows用スクリーンセーバー(多分7以降なら動くのでは？Win10で開発)
 - 画面いっぱいの大きなデジタル時計
 - マルチモニタ対応
@@ -10,23 +9,21 @@ Windows用スクリーンセーバー(多分7以降なら動くのでは？Win10
 - 表示色指定
 - 背景色指定
 
-## Requirement
+# Requirement
 Windows7以降?
 
-## Download
+# Download
 [ssbigclock_bin_ver002.zip](https://www.s-m-l.org/ssbigclock/ssbigclock_bin_ver002.zip) 1,062,316 bytes
 
-## Setup
+# Installation
 ssbigclock.scr を C:\Windows\System32 へコピー
 
-## Screen shots
-![Desktop](https://raw.githubusercontent.com/mikekoma/ssBigClock/master/readme/desktop.png)
-
+# Screen shots
 ![Settings](https://raw.githubusercontent.com/mikekoma/ssBigClock/master/readme/setting.png)
 
 ![Dialog](https://raw.githubusercontent.com/mikekoma/ssBigClock/master/readme/setup.png)
 
-## Licence
+# Licence
 MIT License
 
 Copyright (c) 2020 Suns & Moon Laboratory
@@ -49,11 +46,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-## Development environment
+# Development environment
 Delphi XE10.3で開発  
 開発と動作確認はWindows10
 
-## History
+# History
 2020-04-03 Ver002
 - フォントダイアログ、開いたときに設定値反映していなかったのを修正
 - FontColorの初期値を$404040から$202020に変更
@@ -62,13 +59,13 @@ Delphi XE10.3で開発
 
 2020-04-02 Ver001
 
-## 参考資料
+# 参考資料
 これ以上はないのじゃないかという解説記事。これ消えたらどうしようレベル。
 これを参考にスレッドやめてマルチモニタ対応した感じです。これ調べてたらすごく時間かかったはず。
 
 [Delphi で作るスクリーンセーバー制作講座](http://www009.upp.so-net.ne.jp/rando/how2ss/index.html)
 
-## Author
+# Author
 Suns & Moon Laboratory  
 https://www.s-m-l.org  
 [twitter @mikekoma](https://twitter.com/mikekoma)
