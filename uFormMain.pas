@@ -4,7 +4,7 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, System.Generics.Collections, uFormSub,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, System.Generics.Collections,
   Vcl.StdCtrls, Vcl.ExtCtrls, IxPainter, IxSettings;
 
 {$DEFINE xDEBUG_TOP_SHIFT} // DEBUG_TOP_SHIFT定義でデバッグ用にウィンドウを下にシフト
@@ -22,21 +22,23 @@ type
     procedure FormMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
   private
     { Private 宣言 }
-    Forms: TObjectList<TFormSub>;
-    Settings: TIxSettings;
-
-    Painter: TIxPainter;
+    Forms: TObjectList<TFormMain>;
 
     before_time: string;
     mouse_x, mouse_y: Integer;
     timer_count1: Integer;
     EnableInput: boolean;
+    ObjectIndex: Integer;
     procedure show_screensaver;
     procedure show_preview;
   protected
     procedure CreateParams(var Params: TCreateParams); override;
   public
     { Public 宣言 }
+    class var ObjectCount: Integer; // クラスフィールド
+
+  var
+    Painter: TIxPainter;
     procedure WMSysCommand(var Msg: TWMSysCommand); message WM_SYSCOMMAND;
     procedure WMEraseBkgnd(var Message: TWMEraseBkgnd); message WM_ERASEBKGND;
   end;
@@ -73,25 +75,43 @@ end;
 // ====================================================================
 procedure TFormMain.FormCreate(Sender: TObject);
 begin
-  Forms := TObjectList<TFormSub>.Create;
-  Settings := TIxSettings.Create;
-  Painter := TIxPainter.Create;
-  Painter.Settings := Settings;
+  ObjectIndex := ObjectCount;
+  inc(ObjectCount);
 
-  EnableInput := false;
-  timer_count1 := 500;
+  Painter := TIxPainter.Create;
+
+  if ObjectIndex = 0 then
+  begin
+    // **** 最初のウィンドウのみの処理 ****
+    Forms := TObjectList<TFormMain>.Create;
+    Painter.Settings := TIxSettings.Create;
+  end;
 
   if hwndParam = 0 then
   begin
+    // ------------------------------------------------
+    // スクリーンセーバー表示
+    // ------------------------------------------------
     ShowCursor(false); // カーソル非表示
     ImeMode := imDisable; // IMEウィンドウを表示させない
-    show_screensaver;
+
+    if ObjectIndex = 0 then
+    begin
+      // **** 最初のウィンドウのみの処理 ****
+      show_screensaver;
+    end;
   end
   else
   begin
+    // ------------------------------------------------
+    // 設定ダイアログの小さいプレビュー表示
+    // ------------------------------------------------
+    // **** 最初のウィンドウのみの処理 ****
     show_preview;
   end;
 
+  EnableInput := false;
+  timer_count1 := 500;
   before_time := '';
   Timer1.Enabled := true;
 end;
@@ -101,9 +121,15 @@ end;
 // ====================================================================
 procedure TFormMain.FormDestroy(Sender: TObject);
 begin
-  Settings.Free;
+  ShowCursor(true);
   Painter.Free;
-  Forms.Free;
+
+  if ObjectIndex = 0 then
+  begin
+    // **** 最初のウィンドウのみの処理 ****
+    Painter.Settings.Free;
+    Forms.Free;
+  end;
 end;
 
 // ====================================================================
@@ -211,7 +237,7 @@ end;
 procedure TFormMain.show_screensaver;
 var
   i: Integer;
-  form_sub: TFormSub;
+  form_sub: TFormMain;
   monitor: TMonitor;
 begin
   for i := 0 to Screen.MonitorCount - 1 do
@@ -231,8 +257,8 @@ begin
     end
     else
     begin
-      form_sub := TFormSub.Create(self);
-      form_sub.Painter.Settings := Settings;
+      form_sub := TFormMain.Create(self);
+      form_sub.Painter.Settings := Painter.Settings;
       form_sub.Show;
 {$IFDEF DEBUG_TOP_SHIFT}
       form_sub.Top := monitor.Height div 4 * 1; // デバッグ用にウィンドウを下へずらす

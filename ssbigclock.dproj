@@ -94,6 +94,7 @@
     <PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
         <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
+        <Debugger_RunParams>/S</Debugger_RunParams>
     </PropertyGroup>
     <ItemGroup>
         <DelphiCompile Include="$(MainSource)">
@@ -101,9 +102,6 @@
         </DelphiCompile>
         <DCCReference Include="uFormMain.pas">
             <Form>FormMain</Form>
-        </DCCReference>
-        <DCCReference Include="uFormSub.pas">
-            <Form>FormSub</Form>
         </DCCReference>
         <DCCReference Include="uSeupDialog.pas">
             <Form>SetupDialog</Form>
