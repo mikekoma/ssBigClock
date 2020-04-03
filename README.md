@@ -4,22 +4,22 @@ SSSM ssBigClock Version002
 
 ## Overview
 
-Windows�p�X�N���[���Z�[�o�[(����7�ȍ~�Ȃ瓮���̂ł́HWin10�ŊJ��)
-��ʂ����ς��̑傫�ȃf�W�^�����v
-�}���`���j�^�Ή�
-�t�H���g�w��
-�\���F�w��
-�w�i�F�w��
+Windows用スクリーンセーバー(多分7以降なら動くのでは？Win10で開発)
+画面いっぱいの大きなデジタル時計
+マルチモニタ対応
+フォント指定
+表示色指定
+背景色指定
 
 ## Requirement
 
-Windows7�ȍ~?
-�J���Ɠ���m�F��Windows10
-Delphi XE10.3�ŊJ��
+Windows7以降?
+開発と動作確認はWindows10
+Delphi XE10.3で開発
 
 ## Setup
 
-ssbigclock.scr �� C:\Windows\System32 �փR�s�[
+ssbigclock.scr を C:\Windows\System32 へコピー
 
 ## Licence
 
@@ -48,19 +48,19 @@ SOFTWARE.
 ## History
 
 2020-04-03 Ver002
- - �t�H���g�_�C�A���O�A�J�����Ƃ��ɐݒ�l���f���Ă��Ȃ������̂��C��
- - FontColor�̏����l��$404040����$202020�ɕύX
- - �`���1�b�����ɓ���(Main,Sub�ň���Ă���)
- - FormMain��FormSub�̃\�[�X��1�{�ɂ܂Ƃ߂�(�ǐ��͗�����)
+ - フォントダイアログ、開いたときに設定値反映していなかったのを修正
+ - FontColorの初期値を$404040から$202020に変更
+ - 描画を1秒おきに統一(Main,Subで違っていた)
+ - FormMainとFormSubのソースを1本にまとめた(可読性は落ちた)
 
 
 2020-04-02 Ver001
 
-## �Q�l����
-����ȏ�͂Ȃ��̂���Ȃ����Ƃ�������L���B�����������ǂ����悤���x���B
-������Q�l�ɃX���b�h��߂ă}���`���j�^�Ή����������ł��B���꒲�ׂĂ��炷�������Ԃ��������͂��B
+## 参考資料
+これ以上はないのじゃないかという解説記事。これ消えたらどうしようレベル。
+これを参考にスレッドやめてマルチモニタ対応した感じです。これ調べてたらすごく時間かかったはず。
 
-Delphi �ō��X�N���[���Z�[�o�[����u��
+Delphi で作るスクリーンセーバー制作講座
 http://www009.upp.so-net.ne.jp/rando/how2ss/index.html
 
 ## Author
