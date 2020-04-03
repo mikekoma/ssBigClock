@@ -3,22 +3,21 @@
 SSSM ssBigClock Version002
 
 ## Overview
-
 Windows用スクリーンセーバー(多分7以降なら動くのでは？Win10で開発)
-画面いっぱいの大きなデジタル時計
-マルチモニタ対応
-フォント指定
-表示色指定
-背景色指定
+-画面いっぱいの大きなデジタル時計
+-マルチモニタ対応
+-フォント指定
+-表示色指定
+-背景色指定
 
 ## Requirement
-
 Windows7以降?
-開発と動作確認はWindows10
+
+## Development environment
 Delphi XE10.3で開発
+開発と動作確認はWindows10
 
 ## Setup
-
 ssbigclock.scr を C:\Windows\System32 へコピー
 
 ## Screen shots
@@ -30,7 +29,6 @@ ssbigclock.scr を C:\Windows\System32 へコピー
 
 
 ## Licence
-
 MIT License
 
 Copyright (c) 2020 Suns & Moon Laboratory
@@ -54,13 +52,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 ## History
-
 2020-04-03 Ver002
- - フォントダイアログ、開いたときに設定値反映していなかったのを修正
- - FontColorの初期値を$404040から$202020に変更
- - 描画を1秒おきに統一(Main,Subで違っていた)
- - FormMainとFormSubのソースを1本にまとめた(可読性は落ちた)
-
+-フォントダイアログ、開いたときに設定値反映していなかったのを修正
+-FontColorの初期値を$404040から$202020に変更
+-描画を1秒おきに統一(Main,Subで違っていた)
+-FormMainとFormSubのソースを1本にまとめた(可読性は落ちた)
 
 2020-04-02 Ver001
 
@@ -68,11 +64,9 @@ SOFTWARE.
 これ以上はないのじゃないかという解説記事。これ消えたらどうしようレベル。
 これを参考にスレッドやめてマルチモニタ対応した感じです。これ調べてたらすごく時間かかったはず。
 
-Delphi で作るスクリーンセーバー制作講座
-http://www009.upp.so-net.ne.jp/rando/how2ss/index.html
+[Delphi で作るスクリーンセーバー制作講座](http://www009.upp.so-net.ne.jp/rando/how2ss/index.html)
 
 ## Author
-
 Suns & Moon Laboratory
 https://www.s-m-l.org
 twitter @mikekoma
