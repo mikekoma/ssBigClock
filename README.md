@@ -13,10 +13,6 @@ Windows用スクリーンセーバー(多分7以降なら動くのでは？Win10
 ## Requirement
 Windows7以降?
 
-## Development environment
-Delphi XE10.3で開発
-開発と動作確認はWindows10
-
 ## Setup
 ssbigclock.scr を C:\Windows\System32 へコピー
 
@@ -26,7 +22,6 @@ ssbigclock.scr を C:\Windows\System32 へコピー
 ![Settings](https://raw.githubusercontent.com/mikekoma/ssBigClock/master/readme/setting.png)
 
 ![Dialog](https://raw.githubusercontent.com/mikekoma/ssBigClock/master/readme/setup.png)
-
 
 ## Licence
 MIT License
@@ -50,6 +45,10 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+## Development environment
+Delphi XE10.3で開発
+開発と動作確認はWindows10
 
 ## History
 2020-04-03 Ver002
