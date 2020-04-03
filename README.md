@@ -14,7 +14,7 @@ Windows用スクリーンセーバー(多分7以降なら動くのでは？Win10
 Windows7以降?
 
 ## Download
-[ssbigclock_bin_ver002.zip](https://www.s-m-l.org/ssbigclock/ssbigclock_bin_ver002.zip)
+[ssbigclock_bin_ver002.zip](https://www.s-m-l.org/ssbigclock/ssbigclock_bin_ver002.zip) 1,062,316 bytes
 
 ## Setup
 ssbigclock.scr を C:\Windows\System32 へコピー
