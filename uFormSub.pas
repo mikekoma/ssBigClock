@@ -117,7 +117,7 @@ begin
 end;
 
 // ====================================================================
-//
+// スクリーンセーバー終了
 // ====================================================================
 procedure TFormSub.FormClick(Sender: TObject);
 begin
@@ -168,10 +168,9 @@ begin
   if before_time <> str then
   begin
     before_time := str;
-    Painter.DrawBackground;
+    Painter.DrawBackground; // 裏画面への描画処理
+    Invalidate;
   end;
-
-  Invalidate;
 end;
 
 end.

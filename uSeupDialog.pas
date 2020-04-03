@@ -36,12 +36,11 @@ implementation
 
 procedure TSetupDialog.btnFontClick(Sender: TObject);
 begin
+  FontDialog1.Font.Name := btnFont.Caption;
   if FontDialog1.Execute then
   begin
     btnFont.Caption := FontDialog1.Font.Name;
-
   end;
-
 end;
 
 procedure TSetupDialog.FormCreate(Sender: TObject);

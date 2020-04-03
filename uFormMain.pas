@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, System.Generics.Collections, uFormSub,
   Vcl.StdCtrls, Vcl.ExtCtrls, IxPainter, IxSettings;
 
-{$DEFINE xDEBUG_TOP_SHIFT}
+{$DEFINE xDEBUG_TOP_SHIFT} // DEBUG_TOP_SHIFT定義でデバッグ用にウィンドウを下にシフト
 
 type
   TFormMain = class(TForm)
@@ -23,18 +23,20 @@ type
   private
     { Private 宣言 }
     Forms: TObjectList<TFormSub>;
+    Settings: TIxSettings;
+
+    Painter: TIxPainter;
+
     before_time: string;
     mouse_x, mouse_y: Integer;
     timer_count1: Integer;
-    Painter: TIxPainter;
     EnableInput: boolean;
-    Settings: TIxSettings;
+    procedure show_screensaver;
+    procedure show_preview;
   protected
     procedure CreateParams(var Params: TCreateParams); override;
   public
     { Public 宣言 }
-    procedure show_screensaver;
-    procedure show_preview;
     procedure WMSysCommand(var Msg: TWMSysCommand); message WM_SYSCOMMAND;
     procedure WMEraseBkgnd(var Message: TWMEraseBkgnd); message WM_ERASEBKGND;
   end;
@@ -132,7 +134,7 @@ begin
 end;
 
 // ====================================================================
-//
+// スクリーンセーバー終了
 // ====================================================================
 procedure TFormMain.FormClick(Sender: TObject);
 begin
@@ -156,7 +158,7 @@ begin
 end;
 
 // ====================================================================
-//
+// 描画(Canvasへのコピー)
 // ====================================================================
 procedure TFormMain.FormPaint(Sender: TObject);
 begin
@@ -183,7 +185,7 @@ begin
   if before_time <> str then
   begin
     before_time := str;
-    Painter.DrawBackground;
+    Painter.DrawBackground; // 裏画面への描画処理
     Invalidate;
   end;
 end;

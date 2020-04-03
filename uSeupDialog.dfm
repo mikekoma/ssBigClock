@@ -21,7 +21,7 @@ object SetupDialog: TSetupDialog
     Top = 8
     Width = 207
     Height = 13
-    Caption = 'Suns && Moon Laboratory ssBigClock Ver001'
+    Caption = 'Suns && Moon Laboratory ssBigClock Ver002'
   end
   object btnOk: TButton
     Left = 51
