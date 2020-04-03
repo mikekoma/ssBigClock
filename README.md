@@ -26,7 +26,7 @@ ssbigclock.scr を C:\Windows\System32 へコピー
 
 ![Settings](https://raw.githubusercontent.com/mikekoma/ssBigClock/master/readme/setting.png)
 
-![Dialog](https://raw.githubusercontent.com/mikekoma/ssBigClock/master/readme/dialog.png)
+![Dialog](https://raw.githubusercontent.com/mikekoma/ssBigClock/master/readme/setup.png)
 
 
 ## Licence
