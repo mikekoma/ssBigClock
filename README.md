@@ -50,7 +50,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 ## Development environment
-Delphi XE10.3で開発
+Delphi XE10.3で開発  
 開発と動作確認はWindows10
 
 ## History
@@ -69,6 +69,6 @@ Delphi XE10.3で開発
 [Delphi で作るスクリーンセーバー制作講座](http://www009.upp.so-net.ne.jp/rando/how2ss/index.html)
 
 ## Author
-Suns & Moon Laboratory
-https://www.s-m-l.org
+Suns & Moon Laboratory  
+https://www.s-m-l.org  
 twitter @mikekoma
