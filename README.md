@@ -65,6 +65,9 @@ Delphi XE10.3で開発
 
 [Delphi で作るスクリーンセーバー制作講座](http://www009.upp.so-net.ne.jp/rando/how2ss/index.html)
 
+とか書いていたら消えていましたのでこちら。
+[WayBackMachine > Delphi で作るスクリーンセーバー制作講座](https://web.archive.org/web/20210126145054/http://www009.upp.so-net.ne.jp/rando/how2ss/index.html)
+
 # Author
 Suns & Moon Laboratory  
 https://www.s-m-l.org  
